@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
+use App\Models\Role;
 use App\Models\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -51,9 +52,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'mobile' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role_id' =>['required']
         ]);
     }
 
@@ -66,11 +70,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Admin::create([
-            'name' => $data['name'],
+        $user=Admin::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'mobile' => $data['mobile'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        foreach($data["role_id"] as $role_id){
+            $user->user_role()->create(["role_id"=>$role_id]);
+        }
+        return $user;
     }
 
     /**
@@ -80,7 +90,8 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('admin.auth.register');
+        $roles=Role::select("name","id")->whereNotIn("slug",["superadmin","admin"])->pluck("name","id")->all();
+        return view('admin.auth.register',compact("roles"));
     }
 
     /**

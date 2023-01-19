@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 
 
-Route::middleware("admin.guest")->namespace("App\Http\Controllers\Admin")->group(function () {
+Route::middleware("admin.guest")->group(function () {
 
     // Login
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

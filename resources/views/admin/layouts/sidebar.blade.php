@@ -1,30 +1,27 @@
- <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-    <div class="sb-sidenav-menu">
-        <div class="nav">
-            @if(adminAccessRoute(config('permissions.dashboard.access.view')))
-                <a class="nav-link" href="{{route("admin.dashboard")}}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Dashboard
-                </a>
-            @endif
-            @if(adminAccessRoute(config('permissions.role.access.view')))
-                <a class="nav-link" href="{{route("admin.roles.index")}}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                    Roles
-                </a>
-            @endif
-            @if(adminAccessRoute(config('permissions.admin-user.access.view')))
-                <a class="nav-link" href="{{route("admin.users.index")}}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                    Users
-                </a>
-            @endif
-            @if(adminAccessRoute(config('permissions.category.access.view')))
-                <a class="nav-link" href="{{route("admin.categories.index")}}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                    Categories
-                </a>
-            @endif
-        </div>
-    </div>
-</nav>
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{url("/")}}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="components-alerts.html">
+              <i class="bi bi-circle"></i><span>Alerts</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+
+    </ul>
+
+  </aside>

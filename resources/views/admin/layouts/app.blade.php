@@ -8,41 +8,62 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }} :: Admin</title>
+    <!-- Favicons -->
+    <link href="{{asset('img/favicon.png')}}" rel="icon">
+    <link href="{{asset('img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
-    <link href="{{asset("assets/css/styles.css")}}" rel="stylesheet" />
-    <link href="{{asset("assets/css/custom.css")}}" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{asset('plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('plugins/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{asset('plugins/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    {{--  <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>  --}}
     @stack("styles")
 </head>
- <body id="app" class="sb-nav-fixed">
+ <body id="app">
     @include("admin.layouts.header")
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            @include("admin.layouts.sidebar")
+    @include("admin.layouts.sidebar")
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>{{$moduleName??""}}</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{url("/")}}">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+            </nav>
         </div>
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid px-4">
-                    <h4 class="mt-4">{{$moduleName??""}}</h4>
-                    {{--  <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Tables</li>
-                    </ol>  --}}
-                    <div>
-                        @yield('content')
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Dashboard</h5>
+                            @yield('content')
+                        </div>
                     </div>
                 </div>
-            </main>
-            @include("admin.layouts.footer")
-        </div>
-    </div>
-<script src="{{asset("js/app.js")}}"></script>
-<script src="{{asset("assets/plugins/jquery/jquery.min.js")}}"/>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="{{asset("assets/js/scripts.js")}}"></script>
-<script src="{{asset("assets/plugins/toastr/toastr.min.js")}}"></script>
-<script>
- function deleteRecordByAjax(deleteUrl, moduleName, dataTablesName, appendMsg) {
+            </div>
+        </section>
+    </main>
+    @include("admin.layouts.footer")
+    {{--  <script src="{{asset("js/app.js")}}"></script>  --}}
+    <script src="{{asset("plugins/jquery/jquery.min.js")}}"></script>
+    <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('plugins/tinymce/tinymce.min.js')}}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{{asset('js/main.js')}}"></script>
+    <script src="{{asset("plugins/toastr/toastr.min.js")}}"></script>
+    <script>
+    function deleteRecordByAjax(deleteUrl, moduleName, dataTablesName, appendMsg) {
         appendMsg = appendMsg || '';
         var deleteAlertStr = "{{ __('admin/general.delete_confirm_msg') }}"+" "+moduleName+"? "+appendMsg;
 

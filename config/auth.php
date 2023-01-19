@@ -36,9 +36,39 @@ return [
     */
 
     'guards' => [
+        'cloninig_agent' => [
+            'driver' => 'session',
+            'provider' => 'cloninig_agents',
+        ],
+
+        'lab' => [
+            'driver' => 'session',
+            'provider' => 'labs',
+        ],
+
+        'programmer' => [
+            'driver' => 'session',
+            'provider' => 'programmers',
+        ],
+
+        'exhibitor' => [
+            'driver' => 'session',
+            'provider' => 'exhibitors',
+        ],
+
+        'distributor' => [
+            'driver' => 'session',
+            'provider' => 'distributors',
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
+        ],
+
+        'superadmin' => [
+            'driver' => 'session',
+            'provider' => 'superadmins',
         ],
 
         'web' => [
@@ -65,9 +95,39 @@ return [
     */
 
     'providers' => [
+        'cloninig_agents' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\CloninigAgent::class,
+        ],
+
+        'labs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Lab::class,
+        ],
+
+        'programmers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Programmer::class,
+        ],
+
+        'exhibitors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Exhibitor::class,
+        ],
+
+        'distributors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Distributor::class,
+        ],
+
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+
+        'superadmins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Superadmin::class,
         ],
 
         'users' => [
@@ -97,9 +157,51 @@ return [
     */
 
     'passwords' => [
+        'cloninig_agents' => [
+            'provider' => 'cloninig_agents',
+            'table' => 'cloninig_agent_password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'labs' => [
+            'provider' => 'labs',
+            'table' => 'lab_password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'programmers' => [
+            'provider' => 'programmers',
+            'table' => 'programmer_password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'exhibitors' => [
+            'provider' => 'exhibitors',
+            'table' => 'exhibitor_password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'distributors' => [
+            'provider' => 'distributors',
+            'table' => 'distributor_password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
         'admins' => [
             'provider' => 'admins',
             'table' => 'admin_password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'superadmins' => [
+            'provider' => 'superadmins',
+            'table' => 'superadmin_password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],

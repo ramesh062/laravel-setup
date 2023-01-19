@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Role;
+use App\Models\UserRole;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\Admin\Auth\VerifyEmail;
 use App\Notifications\Admin\Auth\ResetPassword;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Admin extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +20,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','role_id'
+        'first_name','last_name', 'email', 'password','mobile'
     ];
 
     /**
@@ -61,7 +62,7 @@ class Admin extends Authenticatable
         $this->notify(new VerifyEmail);
     }
 
-    public function role(){
-        return $this->belongsTo(Role::class);
+    public function user_role(){
+        return $this->hasMany(UserRole::class);
     }
 }
